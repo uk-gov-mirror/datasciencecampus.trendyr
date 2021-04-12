@@ -1,0 +1,47 @@
+---
+author: "Harry Churchley"
+date: "`r Sys.Date()`"
+title: "covid-deaths"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{covid-deaths}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(trendyr)
+library(dbplyr)
+library(lubridate)
+library(ggplot2)
+library(ggrepel)
+```
+
+
+```{r}
+head(deaths_london)
+```
+Run trendr on the data and plot the results to a graph.
+
+```{r}
+london_deaths_trendr <- trendr(df = deaths_london,
+              weekend_effects = FALSE,
+              value.colname = "deaths",
+              time.colname = "date",
+              #output.save = TRUE,
+              #output.file = "london_deaths_trendr.csv",
+              output.plot = TRUE)
+
+```
+Plot the data with a connected scatterplot.
+
+```{r}
+flightpath(london_deaths_trendr)
+```
