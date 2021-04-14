@@ -25,7 +25,7 @@ library(trendyr)
 head(japanGDPData)
 ```
 
-Run trendr on the data and save the results as a variable. Three new columns are added to the data: trend, first_derivative and timeseries.
+trendr is designed to take daily data, so we need to convert 'year' to a date.
 
 ```{r}
 japanGDPData <- japanGDPData %>%
@@ -35,39 +35,36 @@ head(japanGDPData)
 
 ````
 
+Run trendr on the data and save the output to a csv. Three columns are added - observed, trend and first derivative
 
 ```{r}
 japanGDPData_trendr <- trendr(df = japanGDPData,
               weekend_effects = FALSE,
               value.colname = "value",
               time.colname = "year",
-              #output.save = TRUE,
-              output.plot = TRUE)
-```
+              output.save = TRUE,
+              output.file = "londondeathsData_trendr.csv")
 
-Run trendr on the data and save the results to disk. Three new columns are added to the data: trend, first_derivative and timeseries.
+head(japanGDPData_trendr)
 
-```{r}
-trendr::trendr(df = japanGDPData,
-        value.colname = 'value',
-        time.colname = 'year',
-        output.save = TRUE)
 ```
 
 Run trendr on the data and plot the results to a graph.
 
 ```{r}
-trendr::trendr(df = japanGDPData,
-        value.colname = 'value',
-        time.colname = 'year',
-        output.plot = TRUE)
+japanGDPData_trendr <- trendr(df = japanGDPData,
+              weekend_effects = FALSE,
+              value.colname = "value",
+              time.colname = "year",
+              output.plot = TRUE)
+
 ```
 
-
+Plot the data with a connected scatterplot.
 
 ```{r}
 
-flightpath_copy(df = japanGDPData_trendr, label_type = "y")
+flightpath(df = japanGDPData_trendr, label_type = "y")
 ```
 
 

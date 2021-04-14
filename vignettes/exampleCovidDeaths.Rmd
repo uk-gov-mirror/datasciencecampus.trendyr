@@ -16,6 +16,8 @@ knitr::opts_chunk$set(
 )
 ```
 
+Install dependancies 
+
 ```{r setup}
 library(trendyr)
 library(dbplyr)
@@ -24,9 +26,23 @@ library(ggplot2)
 library(ggrepel)
 ```
 
+View data
 
 ```{r}
 head(londondeathsData)
+```
+Run trendr on the data and save the output to a csv.
+
+```{r}
+londondeathsData_trendr <- trendr(df = londondeathsData,
+              weekend_effects = FALSE,
+              value.colname = "deaths",
+              time.colname = "date",
+              output.save = TRUE,
+              output.file = "londondeathsData_trendr.csv")
+
+head(londondeathsData_trendr)
+
 ```
 Run trendr on the data and plot the results to a graph.
 
@@ -35,11 +51,10 @@ londondeathsData_trendr <- trendr(df = londondeathsData,
               weekend_effects = FALSE,
               value.colname = "deaths",
               time.colname = "date",
-              output.save = TRUE,
-              output.file = "londondeathsData_trendr.csv",
               output.plot = TRUE)
 
 ```
+
 Plot the data with a connected scatterplot.
 
 ```{r}
