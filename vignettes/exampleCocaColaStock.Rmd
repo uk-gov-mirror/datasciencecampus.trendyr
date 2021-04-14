@@ -1,5 +1,7 @@
 ---
-title: "stock-price"
+author: "Harry Churchley"
+date: "`r Sys.Date()`"
+title: "example: Coca Cola Stock"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{stock-price}
@@ -16,4 +18,45 @@ knitr::opts_chunk$set(
 
 ```{r setup}
 library(trendyr)
+library(readr)
+library(dbplyr)
+library(lubridate)
+library(ggplot2)
+library(ggrepel)
+
 ```
+
+```{r}
+
+head(stockpriceData)
+
+
+```
+ 
+```{r}
+
+stockpriceData_trendr <- trendr(df = stockpriceData,
+              weekend_effects = FALSE,
+              value.colname = "price",
+              time.colname = "date",
+              #output.save = TRUE,
+              #output.file = "stockpriceData_trendr.csv",
+              output.plot = TRUE)
+
+```
+
+```{r}
+flightpath(stockpriceData_trendr)
+
+```
+
+
+
+
+
+
+
+
+
+
+

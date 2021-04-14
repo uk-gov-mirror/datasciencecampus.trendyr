@@ -1,6 +1,7 @@
 ---
 author: "Michael Hodge and Harry Churchley"
 date: "`r Sys.Date()`"
+title: "Example: Random data"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteEngine{knitr::knitr}

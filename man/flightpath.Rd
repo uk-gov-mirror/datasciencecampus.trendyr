@@ -4,10 +4,12 @@
 \alias{flightpath}
 \title{Outputs a connected scatterplot}
 \usage{
-flightpath(df)
+flightpath(df = randomData, label_type = labeltype)
 }
 \arguments{
 \item{df}{The data frame with date, trend and first derivative}
+
+\item{label_type}{The date format of the time series. There are four options: ymd, md, my, y.}
 }
 \description{
 Outputs a connected scatterplot

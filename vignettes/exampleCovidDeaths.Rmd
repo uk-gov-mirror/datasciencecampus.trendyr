@@ -1,7 +1,7 @@
 ---
 author: "Harry Churchley"
 date: "`r Sys.Date()`"
-title: "covid-deaths"
+title: "Example: London Covid Deaths"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{covid-deaths}
@@ -26,22 +26,22 @@ library(ggrepel)
 
 
 ```{r}
-head(deaths_london)
+head(londondeathsData)
 ```
 Run trendr on the data and plot the results to a graph.
 
 ```{r}
-london_deaths_trendr <- trendr(df = deaths_london,
+londondeathsData_trendr <- trendr(df = londondeathsData,
               weekend_effects = FALSE,
               value.colname = "deaths",
               time.colname = "date",
-              #output.save = TRUE,
-              #output.file = "london_deaths_trendr.csv",
+              output.save = TRUE,
+              output.file = "londondeathsData_trendr.csv",
               output.plot = TRUE)
 
 ```
 Plot the data with a connected scatterplot.
 
 ```{r}
-flightpath(london_deaths_trendr)
+flightpath(df = londondeathsData_trendr, label_type = "ymd")
 ```

@@ -1,13 +1,17 @@
 ##' Outputs a connected scatterplot
 ##'
 ##' @param df The data frame with date, trend and first derivative
+##' @param label_type The date format of the time series. There are four options: ymd, md, my, y.
 ##'
 ##' @author Sonia Mazzi and Harry Churchley
 ##' @export
-flightpath <- function(df) {
+flightpath <- function(df = randomData, label_type = labeltype) {
   aux <- df %>%
-    mutate(month = month(date, label=T), day = as.character(day(date))) %>%
-    mutate(label = paste(month, day))
+    mutate(year = as.character(year(date)), month = month(date, label=T), day = as.character(day(date))) %>%
+    mutate(label = dplyr::case_when(label_type == "ymd" ~ paste0(month, " ", day, ", ", year),
+                                    label_type == "md" ~ paste0(month, " ", day),
+                                    label_type == "ym" ~ paste0(month, " ", year),
+                                    label_type == "y" ~ year))
 
   pp <- aux %>%
     ggplot(aes(x = trend, y = first_derivative, label = label)) +

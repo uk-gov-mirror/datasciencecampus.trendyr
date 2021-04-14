@@ -1,6 +1,7 @@
 ---
-author: "Michael Hodge and Harry"
+author: "Michael Hodge and Harry Churchley"
 date: "`r Sys.Date()`"
+title: "example: Japan GDP"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteEngine{knitr::knitr}
@@ -27,10 +28,21 @@ head(japanGDPData)
 Run trendr on the data and save the results as a variable. Three new columns are added to the data: trend, first_derivative and timeseries.
 
 ```{r}
-out <- trendr(df = japanGDPData,
-        value.colname = 'value',
-        time.colname = 'year')
-out
+japanGDPData <- japanGDPData %>%
+  mutate(year = make_date(year))
+
+head(japanGDPData)
+
+````
+
+
+```{r}
+japanGDPData_trendr <- trendr(df = japanGDPData,
+              weekend_effects = FALSE,
+              value.colname = "value",
+              time.colname = "year",
+              #output.save = TRUE,
+              output.plot = TRUE)
 ```
 
 Run trendr on the data and save the results to disk. Three new columns are added to the data: trend, first_derivative and timeseries.
@@ -50,3 +62,12 @@ trendr::trendr(df = japanGDPData,
         time.colname = 'year',
         output.plot = TRUE)
 ```
+
+
+
+```{r}
+
+flightpath_copy(df = japanGDPData_trendr, label_type = "y")
+```
+
+
