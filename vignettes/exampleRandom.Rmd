@@ -25,7 +25,7 @@ library(ggrepel)
 
 The data contained in the trendr R package was analyzed exactly like detailed in this document. randomData is a time series of increasing random numbers with a peak.
 
-First, because the data is contained in a package, we can easily call it from R
+First, because the data is contained in a package, we can easily call it from R.
 
 ```{r}
 head(randomData)

@@ -1,7 +1,7 @@
 ---
 author: "Michael Hodge and Harry Churchley"
 date: "`r Sys.Date()`"
-title: "example: Japan GDP"
+title: "Example: Japan GDP"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteEngine{knitr::knitr}

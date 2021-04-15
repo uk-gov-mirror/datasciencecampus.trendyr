@@ -1,7 +1,7 @@
 ---
 author: "Harry Churchley"
 date: "`r Sys.Date()`"
-title: "example: Coca Cola Stock"
+title: "Example: Coca Cola Stock"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{stock-price}
