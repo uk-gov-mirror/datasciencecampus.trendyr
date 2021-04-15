@@ -10,57 +10,52 @@ vignette: >
   %\usepackage[UTF-8]{inputenc}
 ---
 
-The data contained in the trendr R package was analyzed exactly like detailed in this document. randomData is a time series of increasing random numbers with a peak.
-
-First, because the data is contained in a package, we can easily call it from R
-
+Install dependencies 
 
 ```{r}
 library(knitr)
 knitr::opts_chunk$set(collapse = T, comment = "#>")
-
 library(readr)
 library(trendyr)
 library(dbplyr)
 library(lubridate)
 library(ggplot2)
 library(ggrepel)
-
 ```
+
+The data contained in the trendr R package was analyzed exactly like detailed in this document. randomData is a time series of increasing random numbers with a peak.
+
+First, because the data is contained in a package, we can easily call it from R
 
 ```{r}
 head(randomData)
 ```
 
 
-Run trendr on the data and save the results as a variable. Three new columns are added to the data: trend, first_derivative and timeseries.
-
-```{r}
-output <- trendr(df = randomData,
-        value.colname = 'value',
-        time.colname = 'date')
-output
-```
-
-Run trendr on the data and save the results to disk. Three new columns are added to the data: trend, first_derivative and timeseries.
-
-```{r}
-trendr(df = randomData,
-        value.colname = 'value',
-        time.colname = 'date',
-        output.save = TRUE)
-```
-
-Run trendr on the data and plot the results to a graph.
+Run trendr on the data and save the output to a variable and csv. Three columns are added - observed, trend and first derivative.
 
 ```{r}
 randomData_trendr <- trendr(df = randomData,
+              weekend_effects = FALSE,
+              value.colname = "value",
+              time.colname = "date",
+              output.save = TRUE,
+              output.file = "randomData_trendr.csv")
+
+head(randomData_trendr)
+```
+Run trendr on the data and plot the results to a graph.
+
+```{r}
+trendr(df = randomData,
+        weekend_effects = FALSE,
         value.colname = 'value',
         time.colname = 'date',
         output.plot = TRUE)
 ```
+
 Plot the data with a connected scatterplot.
 
 ```{r}
-flightpath(randomData_trendr)
+flightpath(df = randomData_trendr, label_type = 'md')
 ```

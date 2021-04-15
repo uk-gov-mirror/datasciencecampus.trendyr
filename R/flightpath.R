@@ -10,7 +10,7 @@ flightpath <- function(df = randomData, label_type = labeltype) {
     mutate(year = as.character(year(date)), month = month(date, label=T), day = as.character(day(date))) %>%
     mutate(label = dplyr::case_when(label_type == "ymd" ~ paste0(month, " ", day, ", ", year),
                                     label_type == "md" ~ paste0(month, " ", day),
-                                    label_type == "ym" ~ paste0(month, " ", year),
+                                    label_type == "my" ~ paste0(month, " ", year),
                                     label_type == "y" ~ year))
 
   pp <- aux %>%

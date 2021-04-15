@@ -9,16 +9,12 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
-)
-```
+Install dependencies 
 
-Install dependancies 
-
-```{r setup}
+```{r}
+library(knitr)
+knitr::opts_chunk$set(collapse = T, comment = "#>")
+library(readr)
 library(trendyr)
 library(dbplyr)
 library(lubridate)
@@ -26,12 +22,14 @@ library(ggplot2)
 library(ggrepel)
 ```
 
-View data
+The data contained in the trendr R package was analyzed exactly like detailed in this document. londondeathsData describes the daily COVID-19 deaths by death date in London between 2020-03-09 and 2020-12-06. 
+
+First, because the data is contained in a package, we can easily call it from R
 
 ```{r}
 head(londondeathsData)
 ```
-Run trendr on the data and save the output to a csv.
+Run trendr on the data and save the output to a variable and csv. Three columns are added - observed, trend and first derivative.
 
 ```{r}
 londondeathsData_trendr <- trendr(df = londondeathsData,
@@ -47,11 +45,11 @@ head(londondeathsData_trendr)
 Run trendr on the data and plot the results to a graph.
 
 ```{r}
-londondeathsData_trendr <- trendr(df = londondeathsData,
-              weekend_effects = FALSE,
-              value.colname = "deaths",
-              time.colname = "date",
-              output.plot = TRUE)
+trendr(df = londondeathsData,
+        weekend_effects = FALSE,
+        value.colname = "deaths",
+        time.colname = "date",
+        output.plot = TRUE)
 
 ```
 

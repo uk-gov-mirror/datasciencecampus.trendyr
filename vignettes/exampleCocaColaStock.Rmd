@@ -9,45 +9,54 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
-)
-```
+Install dependencies 
 
-```{r setup}
-library(trendyr)
+```{r}
+library(knitr)
+knitr::opts_chunk$set(collapse = T, comment = "#>")
 library(readr)
+library(trendyr)
 library(dbplyr)
 library(lubridate)
 library(ggplot2)
 library(ggrepel)
-
 ```
+
+The data contained in the trendr R package was analyzed exactly like detailed in this document. stockpriceData describes the monthly close price of Coca Cola (KO) between 2010-01-01 and 2020-12-31. 
+
+First, because the data is contained in a package, we can easily call it from R
 
 ```{r}
-
 head(stockpriceData)
-
-
 ```
- 
+Run trendr on the data and save the output to variable and csv. Three columns are added - observed, trend and first derivative.
+
 ```{r}
 
 stockpriceData_trendr <- trendr(df = stockpriceData,
               weekend_effects = FALSE,
               value.colname = "price",
               time.colname = "date",
-              #output.save = TRUE,
-              #output.file = "stockpriceData_trendr.csv",
-              output.plot = TRUE)
+              output.save = TRUE,
+              output.file = "stockpriceData_trendr.csv")
 
 ```
 
-```{r}
-flightpath(stockpriceData_trendr)
+Run trendr on the data and plot the results to a graph.
 
+```{r}
+
+trendr(df = stockpriceData,
+        weekend_effects = FALSE,
+        value.colname = "price",
+        time.colname = "date",
+        output.plot = TRUE)
+
+```
+Plot the data with a connected scatterplot.
+
+```{r}
+flightpath(df = stockpriceData_trendr, label_type = 'my')
 ```
 
 
